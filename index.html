@@ -485,6 +485,50 @@ main{min-height:calc(100vh - 140px)}
 @media (prefers-reduced-motion:reduce){[data-page].on{animation:none}}
 .btn .bi{width:18px;height:18px;flex:none}
 .btn.main .bi{background:#fff;border-radius:4px;padding:1px}
+
+/* ===== Readability fixes ===== */
+/* Never let anything push the page sideways */
+html,body{overflow-x:clip}
+/* Highlighted words inside buttons: same color as the button text, no underline */
+.btn .hc,.mlink .hc{color:inherit;box-shadow:none}
+.btn.main,.mlink.main{color:#fff}
+/* Long email addresses wrap instead of spilling out of their pill */
+.mails a{max-width:100%;text-align:left}
+.mails a span{min-width:0;overflow-wrap:break-word}
+.mails img{flex:none}
+/* Sticker labels always wrap cleanly */
+.sticker{overflow-wrap:break-word}
+
+@media (max-width:760px){
+  /* FeedForward card: put the trophy badge under the logos, not on top of them */
+  .pw-art{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:48px 16px 20px}
+  .pw-art .winbadge{position:static;transform:none;white-space:normal}
+}
+
+@media (max-width:560px){
+  /* Nav: name on its own row, links scroll on a full-width row below */
+  .nav .in{flex-wrap:wrap;gap:8px 12px;padding:10px 16px}
+  .brand{font-size:19px}
+  .nav .links{order:3;width:100%;margin-left:0;padding-bottom:2px;
+    -webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+  .nav .links a{font-size:14px;padding:6px 11px}
+  /* Typewriter line: reserve two lines so long titles don't jump the page */
+  .type{min-height:2.6em}
+  /* Photo stickers stay inside the screen */
+  .deck{margin-left:auto;margin-right:auto}
+  .deck .sticker{font-size:15px;padding:9px 12px;max-width:72%}
+  .deck .sticker small{font-size:12.5px}
+  .deck .sticker .trophy{width:20px;height:20px}
+  .deck .s1{left:8px;bottom:18px}
+  .deck .s2{right:8px;top:14px}
+  /* Contact box: more room for content on phones */
+  .contact .box{padding:40px 18px}
+  .contact .ctas .btn{justify-content:center}
+  .mails a{font-size:14.5px;padding:8px 14px}
+  /* Modal: close button doesn't crowd the title */
+  .pm-card{padding:28px 18px 32px}
+  .pm-card h2{padding-right:52px}
+}
 </style>
 </head>
 <body>
@@ -626,6 +670,16 @@ main{min-height:calc(100vh - 140px)}
           <span class="pw-sub">Hybrid edge–cloud conversation assistant</span>
           <span class="pw-desc">Runs on an NVIDIA Jetson Orin Nano, notices when a speaker pauses awkwardly mid-sentence, and shows a short cue to help them continue.</span>
           <span class="pw-foot"><span class="chips"><span>Jetson Orin Nano</span><span>Python</span><span>Speech recognition</span><span>Cloud AI</span></span><span class="pw-stat">110 ms speech recognition</span></span>
+          <span class="pw-more">Read the full story →</span>
+        </span>
+      </button>
+      <button class="pwide" data-open="skyrehearsal" aria-haspopup="dialog">
+        <span class="pw-art" style="background:var(--sky)"><span class="pw-badge">Aviation · Digital twin</span><span class="pw-logos"><img src="skills/javascript.svg" alt="" width="40" height="40"><img src="skills/html5.svg" alt="" width="40" height="40"><img src="skills/css3.svg" alt="" width="40" height="40"><img src="skills/githubactions.svg" alt="" width="40" height="40"></span></span>
+        <span class="pw-body">
+          <span class="pw-name">Sky Rehearsal</span>
+          <span class="pw-sub">3D circuit rehearsal for trainee pilots at Begumpet, Hyderabad</span>
+          <span class="pw-desc">A browser-based digital twin of the Begumpet Airport (VOHY) training circuit: trainee pilots fly the route on a 3D satellite globe, hear waypoint callouts, take quizzes before each stage and practise with wind, all before they get in the aircraft.</span>
+          <span class="pw-foot"><span class="chips"><span>JavaScript</span><span>CesiumJS</span><span>Playwright</span><span>GitHub Actions</span></span><span class="pw-stat">4 aircraft types</span></span>
           <span class="pw-more">Read the full story →</span>
         </span>
       </button>
@@ -834,7 +888,7 @@ main{min-height:calc(100vh - 140px)}
         <a class="btn" href="https://github.com/honeyreddydaram"><img class="bi" src="skills/github-mark.svg" alt="" width="18" height="18">GitHub</a>
         <a class="btn" href="https://www.youtube.com/@HoneyReddyDaram"><img class="bi" src="skills/youtube.svg" alt="" width="18" height="18">YouTube</a>
       </div>
-      <div class="mails"><a href="mailto:honeyreddydaram.dev@gmail.com"><img src="skills/gmail.svg" alt="">honeyreddydaram.dev@gmail.com</a><a href="mailto:honeyreddydaram@ufl.edu"><img src="logos/uf.png" alt="">honeyreddydaram@ufl.edu</a></div>
+      <div class="mails"><a href="mailto:honeyreddydaram.dev@gmail.com"><img src="skills/gmail.svg" alt=""><span>honeyreddydaram.dev<wbr>@gmail.com</span></a><a href="mailto:honeyreddydaram@ufl.edu"><img src="logos/uf.png" alt=""><span>honeyreddydaram<wbr>@ufl.edu</span></a></div>
     </div>
     <form class="cform" action="https://formsubmit.co/honeyreddydaram.dev@gmail.com" method="POST">
       <h3>Send me a message</h3>
@@ -880,6 +934,24 @@ main{min-height:calc(100vh - 140px)}
 <h4>How well the model works</h4><p>Each row is the true letter and each column is the model's guess. A strong diagonal means most letters are read correctly.</p>
 <figure><img src="media/sb-confusion.jpg" alt="Confusion matrix for the A–Z test set" loading="lazy"><figcaption>Confusion matrix for the A–Z test set</figcaption></figure>
 <h4>Built with</h4><p>React frontend, FastAPI backend, MediaPipe hand landmarks, scikit-learn MLP classifier.</p></div>
+  </div>
+</div>
+<div class="pmodal" id="m-skyrehearsal" role="dialog" aria-modal="true" aria-labelledby="mt-skyrehearsal" hidden>
+  <div class="pm-card">
+    <button class="pm-x" aria-label="Close">✕</button>
+    <h2 id="mt-skyrehearsal">Sky Rehearsal</h2><p class="pm-sub">3D circuit rehearsal for trainee pilots · Begumpet Airport (VOHY), Hyderabad</p>
+    <div class="mlinks"><a class="mlink main" href="https://honeyreddydaram.github.io/sky-rehearsal/">Try the live site</a><a class="mlink" href="https://github.com/honeyreddydaram/sky-rehearsal"><img src="skills/github-mark.svg" alt="">View code on GitHub</a></div>
+    <div class="pm-body">
+<p class="lede">Trainee pilots at Begumpet usually first learn the airfield circuit in the air. Sky Rehearsal lets them rehearse it on the ground first: fly the route on a 3D satellite globe of <span class="hc">Hyderabad</span>, hear what comes next at each waypoint, and check what they know before each stage.</p>
+<h4>What a trainee can do</h4>
+<ul><li><b>Guided rehearsal:</b> an animated aircraft flies the circuit with waypoint text and optional spoken callouts, seen from pilot, chase or overview cameras.</li><li><b>Quizzes:</b> five-question checks pause the flight before route stages, give feedback and save scores.</li><li><b>Wind practice:</b> set a constant wind and see the drift, heading, track and groundspeed change, with optional wind correction.</li><li><b>Airfield briefing:</b> pick runway 09 or 27 and an aircraft (C152, C172R, C172S or DA42NG) to review the circuit's legs, checkpoints and key concepts like QNH and circuit altitude.</li><li><b>Learner profiles:</b> separate profiles track completed sessions, with backup and import. Everything stays in the browser.</li></ul>
+<h4>How it's built</h4>
+<p>A static site with no build step: plain JavaScript modules on <span class="hc">CesiumJS</span> with satellite imagery, world terrain and 3D buildings. Altitude and airspeed come from importable JSON flight profiles, validated before use. If WebGL isn't available, a 2D route diagram keeps practice going.</p>
+<p>Unit tests cover bearings, interpolation, profile validation and wind math, Playwright runs smoke tests, and GitHub Actions tests every push and deploys to GitHub Pages, adding the map token only in the deployed copy so it never sits in the source.</p>
+<h4>Where it's going</h4>
+<p>The goal is a true digital twin: a pre-flight assistant where a trainee picks their aircraft and training stage, and gets hints and warnings for the circuit using live weather before the real flight.</p>
+<div class="mstats"><div><b><span class="hs">2</span></b>runways modelled (09 and 27)</div><div><b><span class="hs">4</span></b>aircraft types</div><div><b><span class="hs">3</span></b>camera views</div></div>
+<p><i>A ground-based familiarisation tool, not a navigation aid. Real procedures and flight values come from the instructor.</i></p></div>
   </div>
 </div>
 <div class="pmodal" id="m-cowingman" role="dialog" aria-modal="true" aria-labelledby="mt-cowingman" hidden>
@@ -1038,9 +1110,9 @@ main{min-height:calc(100vh - 140px)}
 <script>
 (function(){
   /* Edit level (Beginner, Intermediate, Advanced, Expert) and years for each skill here. */
-  var SKILLS={"python": {"p": ["signbridge", "cowingman", "neuralmed", "feedforward", "plants", "ferry"], "w": ["Robotics internship, IIITDM (machine-vision pipeline)"], "level": "", "years": ""}, "java": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "javascript": {"p": ["signbridge"], "w": ["Full-Stack Web Development (MERN), Apna College"], "level": "", "years": ""}, "typescript": {"p": ["feedforward"], "w": [], "level": "", "years": ""}, "sql": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "cplusplus": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "pytorch": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "tensorflow": {"p": ["neuralmed"], "w": ["Robotics internship, IIITDM (CNN models)"], "level": "", "years": ""}, "scikitlearn": {"p": ["signbridge", "neuralmed"], "w": ["Robotics internship, IIITDM (SVM models)"], "level": "", "years": ""}, "huggingface": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "opencv": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "mediapipe": {"p": ["signbridge"], "w": [], "level": "", "years": ""}, "gemini": {"p": ["neuralmed"], "w": [], "level": "", "years": ""}, "nvidia": {"p": ["cowingman"], "w": [], "level": "", "years": ""}, "numpy": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "pandas": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "fastapi": {"p": ["signbridge", "feedforward"], "w": [], "level": "", "years": ""}, "flask": {"p": ["neuralmed", "plants"], "w": [], "level": "", "years": ""}, "spring": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "streamlit": {"p": [], "w": ["ECG signal processing & arrhythmia detection project"], "level": "", "years": ""}, "react": {"p": ["signbridge", "feedforward"], "w": ["Full-Stack Web Development (MERN), Apna College"], "level": "", "years": ""}, "html5": {"p": ["neuralmed", "plants"], "w": ["Full-Stack Web Development (MERN), Apna College"], "level": "", "years": ""}, "css3": {"p": ["neuralmed", "plants", "feedforward"], "w": ["CSS certificate, Codekaro"], "level": "", "years": ""}, "postgresql": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "mysql": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "kafka": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "redis": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "docker": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "aws": {"p": ["cowingman"], "w": ["AWS Certified Cloud Practitioner (score 821/1000)"], "level": "", "years": ""}, "git": {"p": ["signbridge", "orderflow", "neuralmed", "feedforward", "plants", "ferry"], "w": [], "level": "", "years": ""}, "github": {"p": ["signbridge", "orderflow", "neuralmed", "feedforward", "plants", "ferry"], "w": [], "level": "", "years": ""}, "githubactions": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "linux": {"p": ["cowingman"], "w": [], "level": "", "years": ""}, "pytest": {"p": ["feedforward"], "w": [], "level": "", "years": ""}, "junit": {"p": ["orderflow"], "w": [], "level": "", "years": ""}};
+  var SKILLS={"python": {"p": ["signbridge", "cowingman", "neuralmed", "feedforward", "plants", "ferry"], "w": ["Robotics internship, IIITDM (machine-vision pipeline)"], "level": "", "years": ""}, "java": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "javascript": {"p": ["skyrehearsal", "signbridge"], "w": ["Full-Stack Web Development (MERN), Apna College"], "level": "", "years": ""}, "typescript": {"p": ["feedforward"], "w": [], "level": "", "years": ""}, "sql": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "cplusplus": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "pytorch": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "tensorflow": {"p": ["neuralmed"], "w": ["Robotics internship, IIITDM (CNN models)"], "level": "", "years": ""}, "scikitlearn": {"p": ["signbridge", "neuralmed"], "w": ["Robotics internship, IIITDM (SVM models)"], "level": "", "years": ""}, "huggingface": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "opencv": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "mediapipe": {"p": ["signbridge"], "w": [], "level": "", "years": ""}, "gemini": {"p": ["neuralmed"], "w": [], "level": "", "years": ""}, "nvidia": {"p": ["cowingman"], "w": [], "level": "", "years": ""}, "numpy": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "pandas": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "fastapi": {"p": ["signbridge", "feedforward"], "w": [], "level": "", "years": ""}, "flask": {"p": ["neuralmed", "plants"], "w": [], "level": "", "years": ""}, "spring": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "streamlit": {"p": [], "w": ["ECG signal processing & arrhythmia detection project"], "level": "", "years": ""}, "react": {"p": ["signbridge", "feedforward"], "w": ["Full-Stack Web Development (MERN), Apna College"], "level": "", "years": ""}, "html5": {"p": ["skyrehearsal", "neuralmed", "plants"], "w": ["Full-Stack Web Development (MERN), Apna College"], "level": "", "years": ""}, "css3": {"p": ["skyrehearsal", "neuralmed", "plants", "feedforward"], "w": ["CSS certificate, Codekaro"], "level": "", "years": ""}, "postgresql": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "mysql": {"p": [], "w": ["Learned in Machine Learning and AI courses, M.S. Artificial Intelligence Systems, University of Florida"], "level": "", "years": "", "course": true}, "kafka": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "redis": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "docker": {"p": ["orderflow"], "w": [], "level": "", "years": ""}, "aws": {"p": ["cowingman"], "w": ["AWS Certified Cloud Practitioner (score 821/1000)"], "level": "", "years": ""}, "git": {"p": ["skyrehearsal", "signbridge", "orderflow", "neuralmed", "feedforward", "plants", "ferry"], "w": [], "level": "", "years": ""}, "github": {"p": ["skyrehearsal", "signbridge", "orderflow", "neuralmed", "feedforward", "plants", "ferry"], "w": [], "level": "", "years": ""}, "githubactions": {"p": ["skyrehearsal", "orderflow"], "w": [], "level": "", "years": ""}, "linux": {"p": ["cowingman"], "w": [], "level": "", "years": ""}, "pytest": {"p": ["feedforward"], "w": [], "level": "", "years": ""}, "junit": {"p": ["orderflow"], "w": [], "level": "", "years": ""}};
   var LEVELS=['Beginner','Intermediate','Advanced','Expert'];
-  var NAMES={signbridge:['SignBridge','ASL recognition & learning'],cowingman:['Co-Wingman','Edge AI conversation assistant'],orderflow:['OrderFlow','Event-driven microservices'],neuralmed:['NeuralMed','Multi-disease screening'],feedforward:['FeedForward','DevFest 2026 winner'],plants:['Plant Detection','YOLOv8 plant identification'],ferry:['Ferry Loading Optimizer','Optimization hackathon']};
+  var NAMES={signbridge:['SignBridge','ASL recognition & learning'],cowingman:['Co-Wingman','Edge AI conversation assistant'],skyrehearsal:['Sky Rehearsal','3D circuit rehearsal for trainee pilots'],orderflow:['OrderFlow','Event-driven microservices'],neuralmed:['NeuralMed','Multi-disease screening'],feedforward:['FeedForward','DevFest 2026 winner'],plants:['Plant Detection','YOLOv8 plant identification'],ferry:['Ferry Loading Optimizer','Optimization hackathon']};
   var m=document.getElementById('skillmodal'),last=null;
   function esc(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML;}
   function openSkill(btn){
