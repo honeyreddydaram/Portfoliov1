@@ -3,13 +3,13 @@
     <clipPath id="sq"><rect x="2" y="2" width="60" height="60" rx="15"/></clipPath>
   </defs>
   <g clip-path="url(#sq)">
-    <rect x="2" y="2" width="60" height="60" fill="#15112B"/>
-    <circle cx="14" cy="13" r="3" fill="#F5F3FF"/>
-    <circle cx="21.5" cy="13" r="3" fill="#F5F3FF" opacity="0.8"/>
-    <circle cx="29" cy="13" r="3" fill="#F5F3FF" opacity="0.6"/>
-    <path d="M13 34 L23 42 L13 50" fill="none" stroke="#4C7CFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="29" y="49" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="22" fill="#FFFFFF" letter-spacing="-0.5">HD</text>
-    <circle cx="57" cy="45.5" r="3" fill="#4C7CFF"/>
+    <rect x="2" y="2" width="60" height="60" fill="#1D1733"/>
+    <rect x="2" y="2" width="60" height="16" fill="#CDBDFF"/>
+    <circle cx="13" cy="10" r="2.3" fill="#FFB8CB"/>
+    <circle cx="21.5" cy="10" r="2.3" fill="#FFD6A8"/>
+    <circle cx="30" cy="10" r="2.3" fill="#AEE9D1"/>
+    <path d="M11 34 L19 41 L11 48" fill="none" stroke="#4FD8C4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="23" y="48" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="21" fill="#FFFFFF" letter-spacing="-0.5">HD</text>
+    <rect x="49" y="44" width="8" height="3.6" rx="1.8" fill="#FF8FB8"/>
   </g>
-  <rect x="2" y="2" width="60" height="60" rx="15" fill="none" stroke="#3A3360" stroke-width="1.5"/>
 </svg>
