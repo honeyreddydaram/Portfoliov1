@@ -60,9 +60,9 @@ p{margin:0}
 .chips-top{display:flex;flex-wrap:wrap;gap:8px}
 .chips-top span{font-weight:700;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;background:var(--ink);color:#fff;border-radius:999px;padding:6px 13px}
 .type{font-family:var(--display);font-weight:600;font-size:clamp(22px,2.6vw,30px);margin-top:14px;min-height:1.3em}
-.type .w{background:linear-gradient(transparent 60%,var(--mint) 60%);padding:0 3px}
-.type .caret{display:inline-block;width:3px;height:1em;background:var(--ink);vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
+.type .w{background:linear-gradient(transparent 60%,var(--mint) 60%);padding:0 3px;display:inline-block;transition:opacity .4s ease,transform .4s ease}
+.type .w.out{opacity:0;transform:translateY(-10px)}
+@media (prefers-reduced-motion:reduce){.type .w{transition:none}}
 .down{position:absolute;left:50%;bottom:-24px;transform:translateX(-50%);width:48px;height:48px;border:var(--bd);border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:3px 3px 0 var(--ink);text-decoration:none;font-size:20px}
 .hero .wrap{display:grid;grid-template-columns:1.25fr 1fr;gap:44px;align-items:center}
 .hello{display:inline-flex;align-items:center;gap:8px;background:var(--mint);border:var(--bd);border-radius:999px;padding:5px 14px;font-weight:600;font-size:14px}
@@ -547,7 +547,7 @@ html,body{overflow-x:clip}
     <div>
       <div class="chips-top"><span>AI Student Developer @ UF</span><span>M.S. AI Systems @ UF</span><span>Edge AI</span><span>Distributed Systems</span><span>AWS Certified</span></div>
       <h1>Hi, I'm <span class="hl">Honey</span></h1>
-      <p class="type" aria-label="I am a Software Engineer, AI Systems Engineer, Fast Learner, Team Player, and Human-Centered AI Engineer">I am a <span class="w" id="tw">Software Engineer</span><span class="caret" aria-hidden="true"></span></p>
+      <p class="type" aria-label="I am a Software Engineer, AI Systems Engineer, Fast Learner, Team Player, and Human-Centered AI Engineer">I am a <span class="w" id="tw">Software Engineer</span></p>
       <p class="lead">I build AI that people can use: full-stack apps, event-driven systems, and edge AI.</p>
       <div class="ctas">
         <a class="btn main" href="#projects">See my projects</a>
@@ -1068,13 +1068,17 @@ html,body{overflow-x:clip}
   var el=document.getElementById('tw'); if(!el) return;
   var words=['Software Engineer','AI Systems Engineer','Fast Learner','Team Player','Human-Centered AI Engineer'];
   if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var i=0,j=words[0].length,del=true;
+  var i=0;
   function tick(){
-    var w=words[i];
-    if(del){ j--; el.textContent=w.slice(0,j); if(j===0){del=false;i=(i+1)%words.length;} setTimeout(tick,45); }
-    else { var n=words[i]; j++; el.textContent=n.slice(0,j); if(j===n.length){del=true; setTimeout(tick,1600); return;} setTimeout(tick,85); }
+    el.classList.add('out');
+    setTimeout(function(){
+      i=(i+1)%words.length;
+      el.textContent=words[i];
+      el.classList.remove('out');
+      setTimeout(tick,2200);
+    },400);
   }
-  setTimeout(tick,1600);
+  setTimeout(tick,2200);
 })();
 </script>
 <script>
